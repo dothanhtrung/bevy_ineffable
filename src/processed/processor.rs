@@ -26,7 +26,7 @@ pub(crate) fn collect_inputs<'a>(
         .iter()
         .filter(|(group_id, _)| meta_data.group_exists(group_id))
         .flat_map(|(group_id, group_data)| {
-            group_data.into_iter().filter_map(|(action_id, bindings)| {
+            group_data.iter().filter_map(|(action_id, bindings)| {
                 meta_data
                     .action(group_id, action_id)
                     .map(|meta| (meta, bindings))

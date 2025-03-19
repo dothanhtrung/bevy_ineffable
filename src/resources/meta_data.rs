@@ -1,5 +1,5 @@
 use bevy::prelude::Resource;
-use bevy::utils::HashMap;
+use std::collections::HashMap;
 
 use crate::input_action::InputKind;
 

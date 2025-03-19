@@ -83,7 +83,9 @@ fn player_wiggle(
     time: Res<Time>,
     mut query: Query<(&mut Transform, &mut Player)>,
 ) {
-    let (mut transform, mut player) = query.single_mut();
+    let Ok((mut transform, mut player)) = query.single_mut() else {
+        return;
+    };
 
     if bindings.just_deactivated(ineff!(PlayerInput::Wiggle)) {
         // Wiggle was just released! Create a timer to start the wiggle!

@@ -95,11 +95,11 @@ fn player_movement(
     time: Res<Time>,
     mut query: Query<&mut Transform, With<Player>>,
 ) {
-    let mut transform = query.single_mut();
-
-    let movement_direction = bindings.direction_2d(ineff!(PlayerInput::Movement));
-    transform.translation.x += movement_direction.x * time.delta_secs() * SPEED;
-    transform.translation.y += movement_direction.y * time.delta_secs() * SPEED;
+    if let Ok(mut transform) = query.single_mut() {
+        let movement_direction = bindings.direction_2d(ineff!(PlayerInput::Movement));
+        transform.translation.x += movement_direction.x * time.delta_secs() * SPEED;
+        transform.translation.y += movement_direction.y * time.delta_secs() * SPEED;
+    }
 }
 
 /// Rotate the player. This is a SingleAxis InputAction, which returns an f32 between -1.0 and 1.0.
@@ -109,35 +109,35 @@ fn player_rotation(
     time: Res<Time>,
     mut query: Query<&mut Transform, With<Player>>,
 ) {
-    let mut transform = query.single_mut();
-
-    let rotate_direction = bindings.direction_1d(ineff!(PlayerInput::Rotate));
-    transform.rotate_z(rotate_direction * time.delta_secs() * ROTATE_SPEED);
+    if let Ok(mut transform) = query.single_mut() {
+        let rotate_direction = bindings.direction_1d(ineff!(PlayerInput::Rotate));
+        transform.rotate_z(rotate_direction * time.delta_secs() * ROTATE_SPEED);
+    }
 }
 
 /// Decide what colour tint the player should have, based on whether they are currently holding down the blush button.
 /// This is a Continuous InputAction, which returns true as long as the button is held down.
 fn player_blushing(bindings: Res<Ineffable>, mut query: Query<&mut Sprite, With<Player>>) {
-    let mut sprite = query.single_mut();
-
-    sprite.color = if bindings.is_active(ineff!(PlayerInput::Blush)) {
-        // When blushing, return a reddish tint.
-        Color::srgb(0.8, 0.4, 0.4)
-    } else {
-        // When not blushing, return a blue/greenish tint.
-        Color::srgb(0.4, 0.8, 0.8)
-    };
+    if let Ok(mut sprite) = query.single_mut() {
+        sprite.color = if bindings.is_active(ineff!(PlayerInput::Blush)) {
+            // When blushing, return a reddish tint.
+            Color::srgb(0.8, 0.4, 0.4)
+        } else {
+            // When not blushing, return a blue/greenish tint.
+            Color::srgb(0.4, 0.8, 0.8)
+        };
+    }
 }
 
 /// Check if the player wants to teleport.
 /// This is a Pulse InputAction, which returns true for exactly one tick, whenever the player activates it.
 fn player_teleportation(bindings: Res<Ineffable>, mut query: Query<&mut Transform, With<Player>>) {
-    let mut transform = query.single_mut();
-
     if bindings.just_pulsed(ineff!(PlayerInput::Teleport)) {
-        // Teleportation moves the player towards the center of the screen.
-        transform.translation.x += transform.translation.x.signum() * -100.;
-        transform.translation.y += transform.translation.y.signum() * -100.;
+        if let Ok(mut transform) = query.single_mut() {
+            // Teleportation moves the player towards the center of the screen.
+            transform.translation.x += transform.translation.x.signum() * -100.;
+            transform.translation.y += transform.translation.y.signum() * -100.;
+        }
     }
 }
 

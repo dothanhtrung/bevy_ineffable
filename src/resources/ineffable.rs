@@ -1,7 +1,7 @@
+use std::collections::HashMap;
 use std::time::Duration;
 
 use bevy::prelude::{Reflect, Resource, Vec2};
-use bevy::utils::HashMap;
 
 use crate::input_action::InputAction;
 use crate::phantom::{Continuous, DualAxis, IAWrp, Pulse, SingleAxis};

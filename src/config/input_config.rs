@@ -1,8 +1,8 @@
+use std::collections::HashMap;
 use std::fmt::Debug;
 
 use bevy::asset::Asset;
 use bevy::reflect::Reflect;
-use bevy::utils::HashMap;
 use serde::{Deserialize, Serialize};
 
 use crate::bindings::InputBinding;

@@ -1,7 +1,6 @@
-use std::time::Duration;
-
-use bevy::utils::HashMap;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
+use std::time::Duration;
 
 use crate::bindings::InputBinding;
 use crate::config::input_config::InputConfig;
