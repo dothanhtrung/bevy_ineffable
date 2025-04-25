@@ -33,7 +33,7 @@ makes accessibility easy.
 ```toml
 [dependencies]
 # Add bevy_ineffable as a dependency to your `Cargo.toml`
-bevy_ineffable = "0.7.0"
+bevy_ineffable = "0.8.0"
 ```
 
 ```rust no_run
@@ -104,6 +104,7 @@ cargo run --example basics
 | 0.13 | 0.4.0 - 0.5.0  |
 | 0.14 | 0.6.0          |
 | 0.15 | 0.7.0          |
+| 0.16 | 0.8.0          |
 
 
 ## Roadmap
