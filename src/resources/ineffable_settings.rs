@@ -50,7 +50,7 @@ impl PostAcceptanceDelay {
             self.should_activate = false;
         } else if let Some(timer) = &mut self.timer {
             timer.tick(time.delta());
-            if timer.finished() {
+            if timer.is_finished() {
                 self.timer = None;
             }
         }

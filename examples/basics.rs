@@ -2,8 +2,8 @@
 //! (DualAxis, SingleAxis, Continuous, Pulse)
 
 use bevy::app::{Startup, Update};
+use bevy::asset::RenderAssetUsages;
 use bevy::prelude::*;
-use bevy::render::render_asset::RenderAssetUsages;
 use bevy::render::render_resource::{Extent3d, TextureDimension, TextureFormat};
 use bevy_ineffable::config::simple_asset_loading::MergeMode;
 

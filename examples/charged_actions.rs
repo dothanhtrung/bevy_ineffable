@@ -10,8 +10,8 @@ use std::f32::consts::TAU;
 use std::time::Duration;
 
 use bevy::app::{Startup, Update};
+use bevy::asset::RenderAssetUsages;
 use bevy::prelude::*;
-use bevy::render::render_asset::RenderAssetUsages;
 use bevy::render::render_resource::{Extent3d, TextureDimension, TextureFormat};
 
 use bevy_ineffable::prelude::*;
@@ -97,7 +97,7 @@ fn player_wiggle(
         player.wiggle_strength =
             duration.as_millis().min(MAX_CHARGE_TIME) as f32 / (MAX_CHARGE_TIME as f32 * 2.0);
         1.0 - player.wiggle_strength
-    } else if !player.wiggle_timer.finished() {
+    } else if !player.wiggle_timer.is_finished() {
         // A timer is running, so we're currently animating the wiggle.
         player.wiggle_timer.tick(time.delta());
         let cos_wave = (player.wiggle_timer.fraction() * TAU * NR_BOUNCES).cos() * -1.;
